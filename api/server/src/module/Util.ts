@@ -1,12 +1,17 @@
 import express from "express";
 import fs from "fs";
-import { RouterKons } from "./admin/RouterKons";
+import { session } from "./SessionData";
 
 export class Util {
 	private caches: ICache[] = [];
 	private _randId: string = '';
 	private _baseDir: string = '';
 	static readonly revisi: string = '202212';
+
+	sessionDefault(s: ISessionData): void {
+		s.error = false;
+		s.pesan = '';
+	}
 
 	getUrl(url: string, params: any[]): string {
 		let urlHasil: string = url;
@@ -16,76 +21,6 @@ export class Util {
 		});
 
 		return urlHasil;
-	}
-
-	//TODO: [rev] param
-	hal2(offsetLog: number, jumlahAbs: number, kunci: string, path: string, jmlPerHal: number, anggota: ISlAnggota): string {
-		return `
-			<nav aria-label="Page navigation example" style="text-align:center">
-				${this.hal3(offsetLog, jumlahAbs, kunci, path, jmlPerHal, anggota)}
-			</nav>
-		`;
-	}
-
-	private hal3(offsetLog: number, jumlahAbs: number, kunci: string, path: string, jmlPerHal: number, anggota: ISlAnggota): string {
-		let hasil: string = '';
-
-		if (jumlahAbs <= jmlPerHal) {
-			return '';
-		}
-
-		let jumlahLog: number = Math.ceil(jumlahAbs / jmlPerHal);
-
-		let halSeb: number;
-		let halSet: number;
-
-		if (jumlahAbs <= 0) {
-			return hasil;
-		}
-
-		halSeb = offsetLog - 1;
-		if (halSeb < 0) halSeb = 0;
-
-		halSet = offsetLog + 1;
-		if (halSet > jumlahLog - 1) halSet = jumlahLog - 1;
-
-		hasil = `
-			<ul class="pagination">
-				<li class="page-item">
-					<a class="page-link" href="${this.getUrlCari(kunci, halSeb, path, anggota)}" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				</li>
-				<li class="page-item"><a class="page-link" href="#">${offsetLog + 1}/${jumlahLog}</a></li>
-				<li class="page-item">
-					<a class="page-link" href="${this.getUrlCari(kunci, halSet, path, anggota)}" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					</a>
-				</li>
-			</ul>		
-		`;
-
-		return hasil;
-	}
-
-	getUrlCari(kunci: string, hal: number, path: string, anggota: ISlAnggota): string {
-		let hasil: string;
-
-		//beranda
-		if (path == RouterKons.daftarAnggotaFilter) {
-			hasil = this.getUrl(path, [kunci, hal])
-		}
-		else if (path == RouterKons.halCariPasanganFilter) {
-			hasil = this.getUrl(path, [anggota.id, kunci, hal])
-		}
-		else if (path == RouterKons.daftarCalonAnakFilter) {
-			hasil = this.getUrl(path, [anggota.id, kunci, hal]);
-		}
-		else {
-			throw Error('path belum didefinisikan');
-		}
-
-		return hasil;
 	}
 
 	stringNull(t: string): string {
@@ -198,10 +133,30 @@ export class Util {
 		});
 	}
 
-	respError(resp: express.Response, e: Error) {
+	logError(e: Error): void {
+		console.group("error");
 		console.debug("==================================================")
 		console.error(e);
 		console.debug("==================================================")
+		console.groupEnd();
+	}
+
+	errorRedirect(req: express.Request, resp: express.Response, e: Error, url: string) {
+		this.logError(e);
+		let s: ISessionData = session(req);
+		s.pesan = 'Ada kesalahan, silahkan coba lagi';
+		resp.redirect(url);
+	}
+
+	/**
+	 * fatal error
+	 * @param req 
+	 * @param resp 
+	 * @param e 
+	 */
+	respError(req: express.Request, resp: express.Response, e: Error) {
+		this.logError(e);
+		this.sessionDefault(session(req));
 		resp.status(500).send(e.message);
 	}
 
@@ -271,3 +226,26 @@ interface ICache {
 	url: string,
 	string: string
 }
+
+
+interface IError {
+	code: number,
+	pesan: string,
+	error?: Error;
+	sebab?: IError;
+}
+
+export class Error2 {
+	static buat(code: number = 200, pesan: string = '', error: Error = null, sebab: IError): IError {
+		return {
+			code: code,
+			pesan: pesan,
+			error: error,
+			sebab: sebab
+		}
+	}
+
+	toString(): string {
+		return JSON.stringify(this);
+	}
+} 

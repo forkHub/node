@@ -1,7 +1,4 @@
-client api
-==========
-api masih belum whitelist
+error login ke halaman login
+error validasi ke halaman bersangkutan
 
-client server
-=============
-tombol admin dihapus dari server
+reset pesan

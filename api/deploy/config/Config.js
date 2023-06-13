@@ -4,7 +4,7 @@ exports.config = void 0;
 //NOTE: FINAL
 exports.config = {
     jmlPerHal: 5,
-    dev: false,
+    dev: true,
     judul: 'silsilah',
     api: true,
     loginCheck: true,

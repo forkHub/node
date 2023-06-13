@@ -16,8 +16,8 @@ export const halDaftar = (s: ISessionData): string => {
             ${dataWeb.pesanHtml(s)}
 
             ${/** daftar anggota */ ""}
-            <div class="daftar-anggota">
-                ${dataWeb.daftarAnggota}
+            <div class="daftar-entitlement">
+                ${dataWeb.daftarEntl}
             </div>
 
             ${nav()}

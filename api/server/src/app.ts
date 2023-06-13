@@ -6,17 +6,21 @@ import { util } from "./module/Util";
 import { Connection } from "./module/Connection";
 import { config } from "./config/Config";
 import { upload } from "./module/upload/Upload";
+import { auth } from "./module/auth/Auth";
+import multer from "multer";
+import { entl } from "./module/entl/entitlement";
 
 const app: express.Express = express();
 const port: number = 3000;
+export const mUpload = multer({
+	dest: 'public/upload2'
+});
 
 try {
 	util.buatRandom();
 	util.baseDir = __dirname;
 
-	app.use(express.static(__dirname + kons.folder_public));
-
-	// app.use(express.json({ limit: '5mb' }));
+	app.use(express.static(__dirname + '/' + kons.folder_public));
 
 	app.use(cookieSession({
 		name: 'toko_session',
@@ -25,7 +29,16 @@ try {
 		maxAge: 1000 * 60 * 60 * 24 * 2
 	}));
 
+
+	// const multer2 = multer({
+	// 	dest: kons.folder_upload
+	// });
+
+	// app.use(multer2));
+
 	app.options('*', function (_req, res) {
+		console.log("option:");
+
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 		res.sendStatus(200);
@@ -35,39 +48,44 @@ try {
 
 	if (config.dev) {
 		allowedDomains.push('htp://localhost:80');
-		allowedDomains.push('htp://localhost');
+		allowedDomains.push('http://localhost');
 	}
 
 	app.use(function (_req, res, next) {
+
+		console.group('check origin');
+		console.log("allowed origin:", allowedDomains);
+
 		if (allowedDomains.indexOf(_req.headers.origin) > -1) {
+			console.log("allowed");
 			res.header("Access-Control-Allow-Origin", `${_req.headers.origin}`);
 		}
 		else {
+			console.log("not allowed");
 			//nothing
 		}
+		console.groupEnd();
+
 		res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 		res.header("Access-Control-Allow-Methods", "OPTIONS,GET,HEAD,POST,PUT");
 		res.status(200);
 		next();
 	});
 
-	// app.use("/", sm.router.router);
-	// app.use("/", api2.router.router);
-	// app.use("/", auth.router.router)
-	// app.use("/", admin.router.router)
-	// app.use("/", mnk.router.router)
+	app.use("/", auth.router.router);
 	app.use("/", upload.router.router);
+	app.use("/", entl.router.router);
 
-	// sm.router.impl();
-	// api2.router.impl();
-	// auth.router.impl();
-	// admin.router.impl();
-	// mnk.router.impl();
+	auth.router.impl();
 	upload.router.impl();
+	entl.router.impl();
 
-	app.use((_req: express.Request, _resp: express.Response, _next: Function) => {
-		// console.log(_req);
-		_resp.status(404).send(`<html><head><title>404</title><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>Halaman Tidak Ditemukan</body></html>`);
+	app.use((_req: express.Request, resp: express.Response, _next: Function) => {
+		console.log("404");
+		console.log("");
+		// _resp.redirect("/auth/login");
+
+		resp.status(404).send(`<html><head><title>404</title><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>Halaman Tidak Ditemukan</body></html>`);
 	})
 
 	process.on('SIGTERM', () => {

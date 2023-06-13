@@ -1,26 +1,27 @@
 import { dataWeb } from "../../data";
 import { nav } from "../elNav";
 
-export const halLogin = (s: ISessionData) => {
+
+export const halBaru = (s: ISessionData): string => {
+
     return `
         <html>
 
         <head>
             ${dataWeb.meta}
-
             <link href="/css/css.css" rel="stylesheet"/>
         </head>
 
         <body>
-            
+        
             ${dataWeb.pesanHtml(s)}
 
-            <form enctype='multipart/form-data' method='post' action='/auth/login'>
+            <form enctype='multipart/form-data' action="/auth/baru" method="post">
                 <label>user name:</label><br />
-                <input type="text" name="user_name" required/><br />
+                <input type="text" name="user_name" /><br />
                 <label>password:</label><br />
-                <input type="password" name="password" required/><br />
-                <input type="submit" value="login">
+                <input type="password" name="password" /><br />
+                <input type="submit" value="daftar">
             </form>
 
             ${nav()}
