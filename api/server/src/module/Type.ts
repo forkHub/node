@@ -92,8 +92,10 @@ interface IAuth {
 	id: number,
 	user_name: string,
 	password: string,
-	hapus: number
+	hapus: number,
+
 	// def_id: number
+	nama_lapak: string
 }
 
 interface IJUmlah {

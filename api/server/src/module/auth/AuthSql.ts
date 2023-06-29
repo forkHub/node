@@ -27,6 +27,10 @@ export class AuthSql {
 		return hasil;
 	}
 
+	/**
+	 * daftar user
+	 * @returns 
+	 */
 	async daftar(): Promise<IAuth[]> {
 		let hasil: IAuth[] = await sql.query(`
 			SELECT * from auth

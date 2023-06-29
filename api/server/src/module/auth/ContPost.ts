@@ -1,0 +1,51 @@
+import md5 from "blueimp-md5";
+import express from "express";
+import { session } from "../SessionData";
+import { util } from "../Util";
+import { auth } from "./Auth";
+
+export class ContPost {
+
+    async login(req: express.Request, resp: express.Response): Promise<void> {
+        try {
+            let userName: string = req.body.user_name;
+            let password: string = md5(req.body.password);
+
+            let user: IAuth[] = await auth.dao.login(userName, password);
+
+            let s: ISessionData = session(req);
+
+            if (!user || user.length == 0) {
+
+                console.group("login gagal:")
+                console.log("username:", userName);
+                console.log("password:", password);
+                console.log("hasil:", user);
+                console.groupEnd();
+
+                s.pesan = 'user name atau password salah';
+                s.login.stateHal = 'error';
+                s.error = true;
+
+                resp.redirect('/auth/login');
+
+                return;
+            }
+
+            let admin: IAuth = user[0];
+
+            s.id = admin.id;
+            s.statusLogin = true;
+            s.login.stateHal = 'sukses';
+            s.pesan = 'Login Berhasil';
+            s.error = false;
+            resp.redirect('/auth/login');
+
+        }
+        catch (e) {
+            // util.errorRedirect(_req, resp, e, "/auth/login");
+            util.respError(req, resp, e);
+        }
+    }
+
+}

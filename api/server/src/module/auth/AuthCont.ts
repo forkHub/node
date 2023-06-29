@@ -3,7 +3,6 @@ import express from "express";
 import { session } from "../SessionData";
 import { util } from "../Util";
 import { auth } from "./Auth";
-import { dataWeb } from "../../data";
 
 export class AuthCont {
 
@@ -14,7 +13,6 @@ export class AuthCont {
 	async restore(req: express.Request): Promise<void> {
 		await auth.dao.restore(parseInt(req.params.id));
 	}
-
 
 	async baru(_req: express.Request, resp: express.Response): Promise<void> {
 		try {
@@ -44,7 +42,6 @@ export class AuthCont {
 				console.log("error duplikat:");
 				util.logError(e);
 				let s: ISessionData = session(_req);
-				// s.baru.stateHal = 'error';
 				s.pesan = 'Duplikat';
 				s.error = true;
 				resp.redirect('/auth/baru');
@@ -55,47 +52,47 @@ export class AuthCont {
 		}
 	}
 
-	async login(req: express.Request, resp: express.Response): Promise<void> {
-		try {
-			let userName: string = req.body.user_name;
-			let password: string = md5(req.body.password);
+	// async login(req: express.Request, resp: express.Response): Promise<void> {
+	// 	try {
+	// 		let userName: string = req.body.user_name;
+	// 		let password: string = md5(req.body.password);
 
-			let hasil: IAuth[] = await auth.dao.login(userName, password);
+	// 		let hasil: IAuth[] = await auth.dao.login(userName, password);
 
-			let s: ISessionData = session(req);
+	// 		let s: ISessionData = session(req);
 
-			if (!hasil || hasil.length == 0) {
+	// 		if (!hasil || hasil.length == 0) {
 
-				console.group("login gagal:")
-				console.log("username:", userName);
-				console.log("password:", password);
-				console.log("hasil:", hasil);
-				console.groupEnd();
+	// 			console.group("login gagal:")
+	// 			console.log("username:", userName);
+	// 			console.log("password:", password);
+	// 			console.log("hasil:", hasil);
+	// 			console.groupEnd();
 
-				s.pesan = 'user name atau password salah';
-				s.login.stateHal = 'error';
-				s.error = true;
+	// 			s.pesan = 'user name atau password salah';
+	// 			s.login.stateHal = 'error';
+	// 			s.error = true;
 
-				resp.redirect('/auth/login');
+	// 			resp.redirect('/auth/login');
 
-				return;
-			}
+	// 			return;
+	// 		}
 
-			let admin: IAuth = hasil[0];
+	// 		let admin: IAuth = hasil[0];
 
-			s.id = admin.id;
-			s.statusLogin = true;
-			s.login.stateHal = 'sukses';
-			s.pesan = 'Login Berhasil';
-			s.error = false;
-			resp.redirect('/auth/login');
+	// 		s.id = admin.id;
+	// 		s.statusLogin = true;
+	// 		s.login.stateHal = 'sukses';
+	// 		s.pesan = 'Login Berhasil';
+	// 		s.error = false;
+	// 		resp.redirect('/auth/login');
 
-		}
-		catch (e) {
-			// util.errorRedirect(_req, resp, e, "/auth/login");
-			util.respError(req, resp, e);
-		}
-	}
+	// 	}
+	// 	catch (e) {
+	// 		// util.errorRedirect(_req, resp, e, "/auth/login");
+	// 		util.respError(req, resp, e);
+	// 	}
+	// }
 
 	async lupa(req: express.Request, resp: express.Response): Promise<void> {
 		try {
@@ -127,51 +124,44 @@ export class AuthCont {
 		}
 	}
 
-	async renderDaftarUser(): Promise<void> {
+	async daftarUser(): Promise<IAuth[]> {
 
-		function daftarAnggota(data: string): string {
-			return `
-				<table>
-					<tr>
-						<th>user name</th>
-						<th>status hapus</th>
-						<th>perintah</th>
-					</tr>
-					${data}
-				</table>`
-		}
+		// function daftarAnggota(data: string): string {
+		// 	return `
+		// 		<table>
+		// 			<tr>
+		// 				<th>user name</th>
+		// 				<th>status hapus</th>
+		// 				<th>perintah</th>
+		// 			</tr>
+		// 			${data}
+		// 		</table>`
+		// }
 
-		return auth.dao.daftar().then((item: IAuth[]) => {
-			let daftar: string = '';
+		let daftar: IAuth[] = await auth.dao.daftar();
+		return daftar;
 
-			item.forEach((item2) => {
-				let hapus = `<a href="/auth/hapus/${item2.id}">hapus</a>`;
-				let restore = `<a href="/auth/restore/${item2.id}">restore</a>`;
+		// return auth.dao.daftar().then((item: IAuth[]) => {
+		// 	let daftar: string = '';
 
-				daftar += `
-						<tr>
-							<td>${item2.user_name}</td>
-							<td>${item2.hapus}</td>
-							<td>${hapus}</td>
-							<td>${restore}</td>
-						</tr>`;
-			});
+		// 	item.forEach((item2) => {
+		// 		let hapus = `<a href="/auth/hapus/${item2.id}">hapus</a>`;
+		// 		let restore = `<a href="/auth/restore/${item2.id}">restore</a>`;
 
-			// let html = `
-			// 		<table>
-			// 			<tr>
-			// 				<th>user name</th>
-			// 				<th>status</th>
-			// 				<th>perintah</th>
-			// 			</tr>
-			// 			${daftar}
-			// 		</table>`;
+		// 		daftar += `
+		// 				<tr>
+		// 					<td>${item2.user_name}</td>
+		// 					<td>${item2.hapus}</td>
+		// 					<td>${hapus}</td>
+		// 					<td>${restore}</td>
+		// 				</tr>`;
+		// 	});
 
-			dataWeb.daftarAnggota = daftarAnggota(daftar);
+		// 	dataWeb.daftarAnggota = daftarAnggota(daftar);
 
-		}).catch(() => {
-			dataWeb.daftarAnggota = daftarAnggota("");
-		})
+		// }).catch(() => {
+		// 	dataWeb.daftarAnggota = daftarAnggota("");
+		// })
 	}
 
 	/**
@@ -193,5 +183,3 @@ export class AuthCont {
 	}
 
 }
-
-export var authController: AuthCont = new AuthCont();

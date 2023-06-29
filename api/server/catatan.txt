@@ -1,9 +1,44 @@
-next:
-=====
-tautan orang tua di halaman silsilah
-admin disederhanakan di jadikan modul terpisah (router, cont, model), dibuat api
-upload image dihapus
+auth:
+login
+lupa password
+ganti password
 
-bug:
-====
-penghitungan lek/dhe masih gagal
+pelapak:
+anggota baru
+edit anggota - profile
+edit lapak profile
+daftar barang di gudang 
+barang baru
+lihat barang di gudang
+edit barang
+
+admin:
+entitlement baru
+daftar entitlement
+daftar anggota
+edit anggota - entitlement - admin
+
+toko:
+daftar lapak di toko
+lihat lapak 
+lihat barang detail
+checkout barang
+
+api:
+barang hapus
+hapus lapak
+barang edit
+barang daftar 
+
+anggota baru
+anggota edit
+anggota hapus
+daftar anggota
+
+anggota - tambah entitlement
+anggota - hapus entitlement
+
+entitlement baru
+entitlement edit
+entitlement hapus
+entitlement daftar

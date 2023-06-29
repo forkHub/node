@@ -1,20 +1,20 @@
-import { dataWeb } from "../../data";
-import { nav } from "../elNav";
-
-
-export const halBaru = (s: ISessionData): string => {
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.halUserBaru = void 0;
+const data_1 = require("../data");
+const elNav_1 = require("../module/elNav");
+const halUserBaru = (s) => {
     return `
         <html>
 
         <head>
-            ${dataWeb.meta}
+            ${data_1.dataWeb.meta}
             <link href="/css/css.css" rel="stylesheet"/>
         </head>
 
         <body>
         
-            ${dataWeb.pesanHtml(s)}
+            ${data_1.dataWeb.pesanHtml(s)}
 
             <form enctype='multipart/form-data' action="/auth/baru" method="post">
                 <label>user name:</label><br />
@@ -24,10 +24,11 @@ export const halBaru = (s: ISessionData): string => {
                 <input type="submit" value="daftar">
             </form>
 
-            ${nav()}
+            ${(0, elNav_1.nav)()}
 
         </body>
 
         </html>
     `;
-}
+};
+exports.halUserBaru = halUserBaru;
