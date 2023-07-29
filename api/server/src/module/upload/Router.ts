@@ -1,7 +1,7 @@
 import express from "express";
 import { util } from "../Util";
-import { auth } from "../auth/Auth";
 import { mUpload } from "../../app";
+import { auth } from "../auth/Auth.js";
 
 export class Router {
 	readonly router = express.Router();

@@ -1,3 +1,4 @@
+import { kons } from "./Url.js";
 import { Util } from "./Util.js";
 
 window.onload = () => {
@@ -14,14 +15,32 @@ window.onload = () => {
             let xhr: XMLHttpRequest = new XMLHttpRequest();
 
             xhr.onload = () => {
-                console.log('on load');
-                console.log(xhr.status);
-                console.log(xhr.responseText);
+                console.group('on load');
+                console.log('status', xhr.status);
+                console.log('response:', xhr.responseText);
+                console.groupEnd();
+
                 if (xhr.status == 401) {
                     Util.dialog(xhr.responseText);
                 }
                 else if (xhr.status == 200) {
-                    Util.dialog('login berhasil');
+                    let el = Util.dialog('login berhasil');
+                    el.onclose = (e) => {
+
+                        let str: string = xhr.responseText;
+                        let obj: IAuth = JSON.parse(str);
+
+                        if (obj.role == 1) {
+
+                        }
+                        else {
+
+                        }
+
+                        console.log(obj);
+
+                        // window.top.location.href = kons.lapakProfile('');
+                    }
                 }
             };
 
@@ -32,7 +51,7 @@ window.onload = () => {
             }
 
             let formData = new FormData(form);
-            xhr.open("post", "http://localhost:3000/auth/login", true);
+            xhr.open("post", kons.login, true);
             xhr.send(formData);
         }
         catch (e) {

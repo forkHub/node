@@ -64,6 +64,7 @@ interface IHasilQuery {
 interface ISessionData {
 	id: number;
 	statusLogin: boolean;
+	role: number;
 	defId: number;
 	pesan: string;
 	error: boolean;
@@ -93,6 +94,7 @@ interface IAuth {
 	user_name: string,
 	password: string,
 	hapus: number,
+	role: number,
 
 	// def_id: number
 	nama_lapak: string

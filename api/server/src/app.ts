@@ -12,6 +12,7 @@ import { entl } from "./module/entl/entitlement";
 
 const app: express.Express = express();
 const port: number = 3000;
+
 export const mUpload = multer({
 	dest: 'public/upload2'
 });
@@ -75,6 +76,8 @@ try {
 	app.use("/", auth.router.router);
 	app.use("/", upload.router.router);
 	app.use("/", entl.router.router);
+
+	// appuse
 
 	auth.router.impl();
 	upload.router.impl();

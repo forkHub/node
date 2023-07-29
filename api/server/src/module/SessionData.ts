@@ -9,6 +9,7 @@ export function session(req: express.Request): ISessionData {
 	s.pesan = s.pesan || '';
 	s.error = s.error || false;
 
+	//TODO: dihapus
 	if (!s.login) {
 		s.login = {
 			stateHal: 'baru',

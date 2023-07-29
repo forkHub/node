@@ -27,7 +27,9 @@ export class ContPost {
                 s.login.stateHal = 'error';
                 s.error = true;
 
-                resp.redirect('/auth/login');
+                // resp.redirect('/auth/login');
+                // resp.status(200).send(JSON.stringify(user));
+                resp.status(401).send('');
 
                 return;
             }
@@ -39,7 +41,10 @@ export class ContPost {
             s.login.stateHal = 'sukses';
             s.pesan = 'Login Berhasil';
             s.error = false;
-            resp.redirect('/auth/login');
+
+            admin.password = '';
+
+            resp.status(200).send(JSON.stringify(admin));
 
         }
         catch (e) {

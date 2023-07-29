@@ -1,4 +1,4 @@
-import { AuthCont } from "./AuthCont";
+import { Cont } from "./Cont";
 import { AuthSql } from "./AuthSql";
 import { ContPost } from "./ContPost";
 import { Router } from "./Router";
@@ -7,7 +7,7 @@ import { RouterKOns } from "./RouterKons";
 class Auth {
     readonly routerKons: RouterKOns = new RouterKOns();
     readonly router: Router = new Router();
-    readonly cont: AuthCont = new AuthCont();
+    readonly cont: Cont = new Cont();
     readonly contPost: ContPost = new ContPost();
     readonly dao: AuthSql = new AuthSql();
 }

@@ -17,6 +17,7 @@ export class AuthSql {
 	//ganti password
 
 	//daftar
+	//TODO: hapus
 	async baru(userName: string, password: string): Promise<IAuth[]> {
 		let hasil: IAuth[] = await sql.query(`
 			INSERT INTO auth 
@@ -27,8 +28,9 @@ export class AuthSql {
 		return hasil;
 	}
 
+	//TODO: dihapus
 	/**
-	 * daftar user
+	 * daftar user, 
 	 * @returns 
 	 */
 	async daftar(): Promise<IAuth[]> {
@@ -45,6 +47,7 @@ export class AuthSql {
 		return hasil;
 	}
 
+	//TODO: dihapus
 	//update sql lainnya berdasarkan is deleted => baca
 	async hapus(id: number): Promise<IHasilQuery[]> {
 		let hasil: IHasilQuery[] = await sql.query(`
@@ -61,6 +64,7 @@ export class AuthSql {
 		return hasil;
 	}
 
+	//TODO: dihapus
 	//update sql lainnya berdasarkan is deleted => baca
 	async restore(id: number): Promise<IHasilQuery[]> {
 		let hasil: IHasilQuery[] = await sql.query(`

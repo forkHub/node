@@ -13,7 +13,7 @@ export class Util {
 		return hasil
 	}
 
-	static dialog(pesan: string): void {
+	static dialog(pesan: string): HTMLDialogElement {
 		let str: string = `
             <dialog>
                 <p>${pesan}</p>
@@ -25,6 +25,7 @@ export class Util {
 		let el = this.html(str) as HTMLDialogElement;
 		document.body.appendChild(el);
 		(el as any).showModal();
+		return el;
 	}
 
 	static getTemplate(query: string): HTMLElement {

@@ -3,8 +3,10 @@ import express from "express";
 import { session } from "../SessionData";
 import { util } from "../Util";
 import { auth } from "./Auth";
+import { ContGet } from "./ContGet";
 
-export class AuthCont {
+export class Cont {
+	readonly cGet: ContGet = new ContGet();
 
 	async hapus(req: express.Request): Promise<void> {
 		await auth.dao.hapus(parseInt(req.params.id));

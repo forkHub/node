@@ -167,7 +167,6 @@ export class Util {
 
 			cache = this.ambilDariCache(file);
 
-
 			if (cache != '') {
 				cache = cache.replace('{{revisi}}', Util.revisi);
 				resolve(cache);
