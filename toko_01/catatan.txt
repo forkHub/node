@@ -1,0 +1,32 @@
+Toko:
+daftar lapak
+lihat lapak
+lihat barang
+
+Auth:
+login
+logout
+ganti password
+lupa password
+
+Gudang:
+daftar barang
+
+
+API:
+auh/login
+auth/logout
+auth/password/ganti
+auth/password/lupa
+
+lapak/daftar
+lapak/:id/lihat
+barang/:id/lihat
+
+lapak/baru
+lapak/edit
+
+gudang/id/barang/daftar
+gudang/barang/id/lihat
+gudang/barang/id/edit
+gudang/barang/id/baru
