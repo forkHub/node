@@ -167,7 +167,7 @@ a.bersih {
 .disp-table-row {display: table-row}
 
 /*FLEX*/
-.display-flex {display: flex}
+.display-flex, .disp-flex {display: flex}
 
 .flex-dir-col {flex-direction: column;}
 

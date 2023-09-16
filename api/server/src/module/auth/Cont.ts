@@ -22,7 +22,13 @@ export class Cont {
 			let userName: string = _req.body.user_name;
 			let password: string = md5(_req.body.password);
 
+			//TODO: validate
+
 			let hasil: IAuth[] = await auth.dao.baru(userName, password);
+
+			//TODO: buat user baru
+
+			resp.status(201).send('');
 
 			console.group('pendaftaran');
 			console.log('user name:', userName);
@@ -31,10 +37,10 @@ export class Cont {
 			console.groupEnd();
 
 
-			let s: ISessionData = session(_req);
-			s.baru.stateHal = 'sukses';
+			// let s: ISessionData = session(_req);
+			// s.baru.stateHal = 'sukses';
 
-			resp.redirect("/auth/baru");
+			// resp.redirect("/auth/baru");
 
 			return;
 

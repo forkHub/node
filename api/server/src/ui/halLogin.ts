@@ -25,6 +25,7 @@ export const halLogin = (s: ISessionData) => {
 
             ${nav()}
 
+            <script src="/js/auth_login.js"></script>
         </body>
 
         </html>

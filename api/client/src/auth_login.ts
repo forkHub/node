@@ -1,4 +1,4 @@
-import { kons } from "./Url.js";
+import { URL, kons } from "./Url.js";
 import { Util } from "./Util.js";
 
 window.onload = () => {
@@ -29,17 +29,17 @@ window.onload = () => {
 
                         let str: string = xhr.responseText;
                         let obj: IAuth = JSON.parse(str);
+                        console.log(obj);
 
                         if (obj.role == 1) {
 
                         }
                         else {
-
+                            //beranda admin
+                            window.top.location.href = kons.lapakProfile('');
                         }
 
-                        console.log(obj);
 
-                        // window.top.location.href = kons.lapakProfile('');
                     }
                 }
             };
@@ -51,7 +51,7 @@ window.onload = () => {
             }
 
             let formData = new FormData(form);
-            xhr.open("post", kons.login, true);
+            xhr.open("post", URL.auth_login, true);
             xhr.send(formData);
         }
         catch (e) {

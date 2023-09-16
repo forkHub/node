@@ -93,7 +93,7 @@ interface IAuth {
 	id: number,
 	user_name: string,
 	password: string,
-	hapus: number,
+	hapus: boolean,
 	role: number,
 
 	// def_id: number

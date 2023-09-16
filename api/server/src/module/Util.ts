@@ -23,73 +23,73 @@ export class Util {
 		return urlHasil;
 	}
 
-	stringNull(t: string): string {
-		if (!t) return '---';
-		if ('' == t) return '---';
+	// stringNull(t: string): string {
+	// 	if (!t) return '---';
+	// 	if ('' == t) return '---';
 
-		return t;
-	}
+	// 	return t;
+	// }
 
-	stringHrefNull(t: string): string {
-		if (!t) return '#';
-		if ('' == t) return '#';
+	// stringHrefNull(t: string): string {
+	// 	if (!t) return '#';
+	// 	if ('' == t) return '#';
 
-		return t
-	}
+	// 	return t
+	// }
 
-	renderValue(t: string): string {
-		if (!t) return '---';
-		if ("" == t) return '---';
+	// renderValue(t: string): string {
+	// 	if (!t) return '---';
+	// 	if ("" == t) return '---';
 
-		return t;
-	}
+	// 	return t;
+	// }
 
-	dateTimeStamp(t: string): string {
-		// console.log('date time stamp, input: ' + t);
+	// dateTimeStamp(t: string): string {
+	// 	// console.log('date time stamp, input: ' + t);
 
-		if (!t) return '---';
-		if ('' == t) return '---';
+	// 	if (!t) return '---';
+	// 	if ('' == t) return '---';
 
-		t = t + '';
+	// 	t = t + '';
 
-		let date: Date = new Date(t);
+	// 	let date: Date = new Date(t);
 
-		if (!date) return '---';
-		if ('Invalid Date' == (date + '')) return '---';
+	// 	if (!date) return '---';
+	// 	if ('Invalid Date' == (date + '')) return '---';
 
-		let dateStr: string = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+	// 	let dateStr: string = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
 
-		// console.log('date time stamp, hasil: ' + dateStr);
-		return dateStr;
-	}
+	// 	// console.log('date time stamp, hasil: ' + dateStr);
+	// 	return dateStr;
+	// }
 
-	buatDateSekarang(): string {
-		let date: Date = new Date();
+	// buatDateSekarang(): string {
+	// 	let date: Date = new Date();
 
-		return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-	}
+	// 	return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	// }
 
-	buatDateLama(): string {
-		let date: Date = new Date(1900, 1, 1);
-		return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-	}
+	// buatDateLama(): string {
+	// 	let date: Date = new Date(1900, 1, 1);
+	// 	return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	// }
 
-	arr2String(ar: string[]): string {
-		let hasil: string = ' ';
+	// arr2String(ar: string[]): string {
+	// 	let hasil: string = ' ';
 
-		ar.forEach((item: string, idx: number) => {
-			if (0 === idx) {
-				hasil += item;
-			}
-			else {
-				hasil += " ," + item;
-			}
-		})
+	// 	ar.forEach((item: string, idx: number) => {
+	// 		if (0 === idx) {
+	// 			hasil += item;
+	// 		}
+	// 		else {
+	// 			hasil += " ," + item;
+	// 		}
+	// 	})
 
-		hasil += ' ';
+	// 	hasil += ' ';
 
-		return hasil;
-	}
+	// 	return hasil;
+	// }
 
 	buatRandom(): void {
 		this._randId = '';
@@ -98,11 +98,11 @@ export class Util {
 		}
 	}
 
-	renderSpasiEnter(str: string): string {
-		str = str.replace(/(?:\r\n|\r\|\n)/g, "<br/>");
-		str = str.replace(/  /g, "&nbsp;&nbsp;");
-		return str;
-	}
+	// renderSpasiEnter(str: string): string {
+	// 	str = str.replace(/(?:\r\n|\r\|\n)/g, "<br/>");
+	// 	str = str.replace(/  /g, "&nbsp;&nbsp;");
+	// 	return str;
+	// }
 
 	private ambilDariCache(url: string): string {
 		let hasil: string = '';
@@ -203,6 +203,10 @@ export class Util {
 
 	buatWa(wa: string, namaBarang: string): string {
 		return 'https://wa.me/' + wa + "?text==========%0D%0A" + namaBarang + "%0D%0A=========%0D%0AAssalamu'alaikum:";
+	}
+
+	pesanWa(wa: string, pesan: string): string {
+		return 'https://wa.me/' + wa + "?text%0D%0A" + pesan;
 	}
 
 	public get randId(): string {

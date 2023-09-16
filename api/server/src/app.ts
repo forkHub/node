@@ -9,6 +9,7 @@ import { upload } from "./module/upload/Upload";
 import { auth } from "./module/auth/Auth";
 import multer from "multer";
 import { entl } from "./module/entl/entitlement";
+import { toko } from "./module/toko/toko";
 
 const app: express.Express = express();
 const port: number = 3000;
@@ -76,12 +77,14 @@ try {
 	app.use("/", auth.router.router);
 	app.use("/", upload.router.router);
 	app.use("/", entl.router.router);
+	app.use("/", toko.router.router);
 
 	// appuse
 
 	auth.router.impl();
 	upload.router.impl();
 	entl.router.impl();
+	toko.router.impl();
 
 	app.use((_req: express.Request, resp: express.Response, _next: Function) => {
 		console.log("404");
@@ -109,7 +112,12 @@ try {
 
 	});
 
-	Connection.connect();
+	if (config.sql == 'sql') {
+		Connection.connect();
+	}
+	else {
+		//start no sql
+	}
 }
 catch (e) {
 	console.log("========================================");

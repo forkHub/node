@@ -1,3 +1,11 @@
+function defBarang(): IBarang[] {
+    return [];
+}
+
+export const store = {
+    barang: defBarang()
+}
+
 export enum URL {
     auth_login = '/auth/login',
     auth_daftar = '/auth/daftar',
@@ -13,14 +21,12 @@ export enum URL {
     gudang_barang_hapus = "/toko/gudang/barang/:id/hapus"
 }
 
-class Kons {
-    readonly base: string = "http://localhost:3000";
-    // readonly auth_login: string = `${this.base}:3000/auth/login`;
-
-    readonly lapakProfile: (id: string) => string = (id: string): string => {
-        return `${this.base}:3000/lapak/${id}/profile`;
+export const urlRes = {
+    toko: URL.toko,
+    barang: (id: number): string => {
+        return URL.barang.replace(':id', id + '');
+    },
+    gudang: {
+        daftar: URL.gudang_daftar
     }
 }
-
-
-export const kons: Kons = new Kons();

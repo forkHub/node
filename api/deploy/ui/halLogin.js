@@ -27,6 +27,7 @@ const halLogin = (s) => {
 
             ${(0, elNav_1.nav)()}
 
+            <script src="/js/auth_login.js"></script>
         </body>
 
         </html>
