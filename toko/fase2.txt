@@ -1,0 +1,14 @@
+Phase 02:
+Penjual:
+lihat lapak
+profile lapak
+lihat barang
+edit profile
+edit barang
+
+Admin:
+daftar anggota
+daftar lapak
+daftar barang di lapak
+daftar barang semua
+
