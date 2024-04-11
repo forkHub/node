@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    {{meta}}
+
+    <link href="/css/css.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <form enctype='multipart/form-data'>
+        <label for="user_name">user name:</label><br />
+        <input type="text" name="user_name" required /><br />
+        <label for="password">password:</label><br />
+        <input type="password" name="password" required /><br />
+        <input type="submit" value="login">
+    </form>
+
+    <script type="javascript">
+        let data = {{data}}
+    </script>
+
+    <script type="module" src="../js/login.js"></script>
+</body>
+
+</html>

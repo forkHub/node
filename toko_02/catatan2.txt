@@ -1,0 +1,4 @@
+error login ke halaman login
+error validasi ke halaman bersangkutan
+
+reset pesan

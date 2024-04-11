@@ -1,0 +1,94 @@
+tps logo eo:
+============
+kode dipakai di ced
+C:\Projects\repo\repository\default\FrameworkCommon\Internal\TenantPropertiesService\Tests\TestGetProperty\setUp.xml
+C:\Projects\repo\repository\default\FrameworkDesktop\Implementation\ProfileProcess\DesktopProfileProcess\setLogoAndTitle.xml
+di platform gak ada
+
+tps logo km:
+============
+C:\Projects\repo\repository\default\AddKnowContentCase\Implementation\DynamicContentCase\Verbs\DisplayContentExportPDF\getCustomTenantHeader.xml
+C:\Projects\repo\repository\default\AddKnowStandAlone\Implementation\ProfileProcess\StandAloneProfileProcess\setLogoAndTitle.xml
+C:\Projects\repo\repository\default\FrameworkCommon\Internal\TenantPropertiesService\Tests\TestGetProperty\setUp.xml
+di platform gak ada
+
+perlu di test buat StandAloneProfileProcess karena belum ada agent yang kelihatan pakai
+
+tps theme logo theme.default
+============================
+C:\Projects\repo\repository\default\AddKnowContentCase\Implementation\DynamicContentCase\Verbs\DisplayContentExportPDF\getCustomTenantHeader.xml
+
+C:\Projects\repo\repository\default\AddKnowStandAlone\Implementation\ProfileProcess\StandAloneProfileProcess\setLogoAndTitle.xml
+C:\Projects\repo\repository\default\FrameworkDesktop\Implementation\ProfileProcess\DesktopProfileProcess\setLogoAndTitle.xml
+
+C:\Projects\repo\repository\default\FrameworkCommon\Internal\TenantPropertiesService\Tests\TestGetProperty\setUp.xml
+C:\Projects\repo\repository\default\FrameworkCommon\Internal\TenantPropertiesService\Tests\TestGetProperty\test.xml
+
+C:\Projects\repo\scripts\upgrade-project-tasks\com\verint\upgrade\information\ApplicationTitleDefaultChangeInformation.groovy
+
+C:\Projects\repo\tests\cucumber\src\main\features\Desktop\ApplicationLogoAndTitle.feature
+C:\Projects\repo\tests\cucumber\target\classes\Desktop\ApplicationLogoAndTitle.feature
+
+C:\Projects\repo\repository\default\AddKnowContentCase\Implementation\DynamicContentCase\Verbs\DisplayContentExportPDF\getCustomTenantHeader.xml
+    tenantPropertiesService = new TenantPropertiesService("theme.default");
+    if (isNullOrUndefined(applicationLogoUri)) {
+        applicationLogoUri = tenantPropertiesService.getProperty("theme.default.logo"); // usually 200 x 65
+        isDefaultLogo = true;
+    }
+
+
+    applicationTitle = tenantPropertiesService.getProperty("theme.default.km-standalone-ui.application-title");
+
+    if (!isNullOrUndefined(applicationTitle)) {}
+
+C:\Projects\repo\repository\default\AddKnowStandAlone\Implementation\ProfileProcess\StandAloneProfileProcess\setLogoAndTitle.xml
+    <![CDATA[tenantPropertiesService = new TenantPropertiesService("theme.default");
+
+    applicationLogoUri = tenantPropertiesService.getProperty("theme.default.logo");
+    applicationTitle = tenantPropertiesService.getProperty("theme.default.km-standalone-ui.application-title");
+    ]]
+
+C:\Projects\repo\repository\default\FrameworkCommon\Internal\TenantPropertiesService\Tests\TestGetProperty\setUp.xml
+    when(mockTenantPropertiesServiceClient.getProperty(eq("theme.default.logo"))).thenReturn("http://localhost:8280/images/my_brand.png")
+    when(mockTenantPropertiesServiceClient.getProperty(eq("theme.default.em-enterprise-desktop.application-title"))).thenReturn("The Engagement Management");
+    when(mockTenantPropertiesServiceClient.getProperty(eq("theme.default.km-standalone-ui.application-title"))).thenReturn("The Knowledge Management");
+
+C:\Projects\repo\repository\default\FrameworkCommon\Internal\TenantPropertiesService\Tests\TestGetProperty\test.xml
+    <![CDATA[assertEquals("http://localhost:8280/images/my_brand.png", tenantPropertiesService.getProperty("theme.default.logo"), "Should return the logo image uri");
+    ]]
+
+C:\Projects\repo\repository\default\FrameworkDesktop\Implementation\ProfileProcess\DesktopProfileProcess\setLogoAndTitle.xml
+    <![CDATA[tenantPropertiesService = new TenantPropertiesService("theme.default");
+
+    applicationLogoUri = tenantPropertiesService.getProperty("theme.default.logo");
+    applicationTitle = tenantPropertiesService.getProperty("theme.default.em-enterprise-desktop.application-title");
+    ]]
+
+C:\Projects\repo\scripts\upgrade-project-tasks\com\verint\upgrade\information\ApplicationTitleDefaultChangeInformation.groovy
+    private static final String INFORMATION = """<p><b>Application Title Changes</b></p>
+        <p>The default application title for Engagement Management has been updated to be Verint for the browser tab title and blank on the channel toolbar.</p>
+        <p>If you want to reinstate Engagement Management as the browser tab title and on the channel toolbar, use the Tenant Properties Service to set the property 'theme.default.em-enterprise-desktop.application-title' with a value of Engagement Management</p>
+        <p></p>
+        <p>The default application title for the Standalone Knowledge Management Desktop has been updated to be Knowledge Management for the browser tab title and on the channel toolbar</p>
+        <p>If you want to update the application title for Knowledge Management, set the "theme.default.km-standalone-ui.application-title" property using the Tenant Properties Service</p>"""
+
+    @Override
+
+C:\Projects\repo\tests\cucumber\src\main\features\Desktop\ApplicationLogoAndTitle.feature
+C:\Projects\repo\tests\cucumber\target\classes\Desktop\ApplicationLogoAndTitle.feature
+
+brand logo png
+==============
+C:\Projects\repo\components\chat-server\chat-template\images\brand.png
+    \brand.png
+
+C:\Projects\repo\components\km-employee-ui\deploy\public\img\brand.png
+
+unit test perlu di check
+default fallback pakai apa
+apa ada custom tambahan kode
+test email graph pakai inline image
+
+element:
+gambar
+tps
