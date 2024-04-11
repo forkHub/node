@@ -1,0 +1,1 @@
+minimize file dengan cara triming
