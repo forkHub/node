@@ -1,0 +1,1 @@
+coba hide character dengan cara menyelipkan ke dalam binary existing
