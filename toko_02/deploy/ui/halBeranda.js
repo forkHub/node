@@ -1,23 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.lapak = void 0;
+exports.beranda = void 0;
 const data_1 = require("../data");
-const store_1 = require("../module/toko/store");
-const toko_1 = require("../module/toko/toko");
+const store_1 = require("../module/store");
+const toko_1 = require("../module/toko");
 const Util_1 = require("../module/Util");
-function item(barang) {
+function item(user) {
     let hasil = '';
-    barang.forEach((item) => {
+    user.forEach((item) => {
         hasil += `<div>
-            <a href='${store_1.urlRes.barang(item.id)}'>
-                <span>${item.nama}</span>
-                <span>${item.harga}</span>
+            <a href='${store_1.urlRes.lapak(item.id)}'>
+                <span>${item.namaLapak}</span>
+                <span>${item.deskripsi}</span>
             </a>
         </div>`;
     });
     return hasil;
 }
-function html(barang) {
+function html(user) {
     return `
         <html>
 
@@ -27,13 +27,13 @@ function html(barang) {
         </head>
 
         <body>
-            ${item(barang)}
+            ${item(user)}
         </body>
 
         </html>`;
 }
 //entry point
-function lapak(req, resp) {
+function beranda(req, resp) {
     try {
         data().then((hasil) => {
             resp.status(200).send(hasil);
@@ -45,9 +45,8 @@ function lapak(req, resp) {
         Util_1.util.resp500(req, resp, e);
     }
 }
-exports.lapak = lapak;
-//TODO: diganti daftar lapak
+exports.beranda = beranda;
 async function data() {
-    let barang = await toko_1.toko.lapak.daftarLapak();
+    let barang = await toko_1.toko.lapakSql.daftarLapak();
     return html(barang);
 }

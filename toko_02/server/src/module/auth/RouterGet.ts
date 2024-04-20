@@ -2,7 +2,7 @@ import express from "express";
 import { util } from "../Util";
 import { session } from "../SessionData";
 import { auth } from "./Auth";
-import { halDaftarUser } from "../../ui/halDaftarUser";
+import { halDaftarUser } from "../../ui/admHalDaftarUser";
 import { halUserBaru } from "../../ui/halUserBaru";
 
 export class RouterGet {
@@ -23,7 +23,7 @@ export class RouterGet {
         router.get("/auth/daftar", auth.cont.checkAuthSession, (req: express.Request, resp: express.Response) => {
             try {
                 //TODO: delegate
-                auth.cont.daftarUser().then((daftar: IUser[]) => {
+                auth.cont.daftarUser().then((daftar: ILapak[]) => {
                     resp.status(200).send(halDaftarUser(session(req), daftar));
                 }).catch((e) => {
                     util.resp500(req, resp, e);

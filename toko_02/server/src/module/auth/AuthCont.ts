@@ -24,7 +24,7 @@ export class Cont {
 
 			//TODO: validate
 
-			let hasil: IUser[] = await auth.dao.baru(userName, password);
+			let hasil: ILapak[] = await auth.dao.baru(userName, password);
 
 			//TODO: buat user baru
 
@@ -132,7 +132,7 @@ export class Cont {
 		}
 	}
 
-	async daftarUser(): Promise<IUser[]> {
+	async daftarUser(): Promise<ILapak[]> {
 
 		// function daftarAnggota(data: string): string {
 		// 	return `
@@ -146,7 +146,7 @@ export class Cont {
 		// 		</table>`
 		// }
 
-		let daftar: IUser[] = await auth.dao.daftar();
+		let daftar: ILapak[] = await auth.dao.daftar();
 		return daftar;
 
 		// return auth.dao.daftar().then((item: IAuth[]) => {

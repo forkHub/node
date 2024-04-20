@@ -1,9 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.halDaftarUser = void 0;
-const data_1 = require("../data");
-const elNav_1 = require("./elNav");
-function user(user) {
+import { dataWeb } from "../data";
+import { nav } from "./elNav";
+
+function user(user: ILapak): string {
     return `
         <div class='disp-flex'>
             <span>${user.userName}</span>
@@ -12,37 +10,40 @@ function user(user) {
         </div>
     `;
 }
-function users(users) {
-    let hasil = '';
+
+function users(users: ILapak[]): string {
+    let hasil: string = '';
+
     users.forEach((item) => {
         hasil += user(item);
         hasil += '\n';
     });
+
     return `<div>
         ${hasil}
     </div>`;
 }
-const halDaftarUser = (s, daftarUser) => {
+
+export const halDaftarUser = (s: ISessionData, daftarUser: ILapak[]): string => {
     return `
         <html>
 
         <head>
-            ${data_1.dataWeb.meta}
+            ${dataWeb.meta}
             <link href="/css/css.css" rel="stylesheet"/>
         </head>
 
         <body>
         
-            ${data_1.dataWeb.pesanHtml(s)}
+            ${dataWeb.pesanHtml(s)}
 
-            ${ /** daftar anggota */""}
+            ${/** daftar anggota */ ""}
             <div class="daftar-anggota">
                 ${users(daftarUser)}
             </div>
 
-            ${(0, elNav_1.nav)()}
+            ${nav()}
         </body>
 
         </html>`;
-};
-exports.halDaftarUser = halDaftarUser;
+}

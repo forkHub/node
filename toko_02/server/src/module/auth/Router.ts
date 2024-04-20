@@ -2,7 +2,7 @@ import express from "express";
 import { auth } from "./Auth";
 import { mUpload } from "../../app";
 import { RouterGet } from "./RouterGet";
-import { URL } from "../toko/store";
+import { URL } from "../store";
 // import { URL } from "url";
 
 export class Router {
@@ -16,6 +16,6 @@ export class Router {
 			auth.contPost.login(req, resp);
 		});
 
-		this.router.post(URL.toko, mUpload.none(), auth.cont.baru);
+		this.router.post(URL.beranda, mUpload.none(), auth.cont.baru);
 	}
 }

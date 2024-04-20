@@ -1,8 +1,8 @@
 import express from "express";
 import { util } from "../module/Util";
-import { toko } from "../module/toko/toko";
+import { toko } from "../module/toko";
 import { dataWeb } from "../data";
-import { URL } from "../module/toko/store";
+import { URL } from "../module/store";
 
 export function halDaftarBarang(req: express.Request, resp: express.Response): void {
     try {
@@ -27,9 +27,9 @@ function item(barang: IBarang[]): string {
                 <span>${item.harga}</span>
             </div>
             <div class='menu'>
-                <a href="${util.getUrl(URL.gudang_barang_edit, [item.id])}">edit info</a>
-                <a href="${util.getUrl(URL.gudang_barang_edit, [item.id])}">edit foto</a>
-                <a href="#" onclick="hapus(${util.getUrl(URL.gudang_barang_hapus, [item.id])})">hapus</a>
+                <a href="${util.getUrl(URL.pl_barang_edit, [item.id])}">edit info</a>
+                <a href="${util.getUrl(URL.pl_barang_edit, [item.id])}">edit foto</a>
+                <a href="#" onclick="hapus(${util.getUrl(URL.pl_barang_hapus, [item.id])})">hapus</a>
             </div>
         </div>`
     })
@@ -39,7 +39,7 @@ function item(barang: IBarang[]): string {
 
 function menu(): string {
     return `
-        <a href="${util.getUrl(URL.gudang_barang_baru, [])}">tambah barang</a>
+        <a href="${util.getUrl(URL.pl_barang_baru, [])}">tambah barang</a>
     `;
 }
 
@@ -64,6 +64,6 @@ function html(barang: IBarang[]): string {
 }
 
 async function data(): Promise<string> {
-    let barang = await toko.gudang.barang.daftar();
+    let barang = await toko.pelapakModule.barang.daftar();
     return html(barang);
 }

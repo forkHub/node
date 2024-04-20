@@ -1,22 +1,20 @@
 import express from "express";
-import { session } from "./SessionData";
-import { util } from "./Util";
+import { URL } from "./store";
+import { barangDetail } from "../ui/halLihatBarang";
+import { toko } from "./toko";
+import { beranda } from "../ui/halBeranda";
+import { lihatLapak } from "../ui/halLihatLapak";
 
-export function resetSession(s: ISessionData) {
-    s.pesan = '';
-    s.error = false;
-}
+export class Router {
+    readonly router = express.Router();
 
-export function render(html: string, req: express.Request, resp: express.Response): void {
-    resetSession(session(req));
-    resp.status(200).send(html);
-}
+    impl(): void {
+        console.log('toko router');
 
-export function response(f: () => void, req: express.Request, resp: express.Response): void {
-    try {
-        f();
-    }
-    catch (e) {
-        util.resp500(req, resp, e);
+        this.router.get(URL.beranda, (req: express.Request, resp: express.Response) => { beranda(req, resp) })
+        this.router.get(URL.barang, (req: express.Request, resp: express.Response) => { barangDetail(req, resp) })
+        this.router.get(URL.lapak, (req: express.Request, resp: express.Response) => { lihatLapak(req, resp) })
+
+        toko.pelapakModule.router.impl(this.router);
     }
 }

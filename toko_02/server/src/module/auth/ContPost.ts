@@ -11,7 +11,7 @@ export class ContPost {
             let userName: string = req.body.user_name;
             let password: string = md5(req.body.password);
 
-            let user: IUser[] = await auth.dao.login(userName, password);
+            let user: ILapak[] = await auth.dao.login(userName, password);
 
             let s: ISessionData = session(req);
 
@@ -34,7 +34,7 @@ export class ContPost {
                 return;
             }
 
-            let admin: IUser = user[0];
+            let admin: ILapak = user[0];
 
             s.id = admin.id;
             s.statusLogin = true;

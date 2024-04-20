@@ -1,49 +1,48 @@
-import { dataWeb } from "../data";
-import { nav } from "./elNav";
-
-function user(user: IUser): string {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.halDaftarUser = void 0;
+const data_1 = require("../data");
+const elNav_1 = require("./elNav");
+function user(user) {
     return `
         <div class='disp-flex'>
-            <span>${user.user_name}</span>
+            <span>${user.userName}</span>
             <button onclick='editClick()'>edit</button>
             <button onclick='hapusClick()'>hapus</button>
         </div>
     `;
 }
-
-function users(users: IUser[]): string {
-    let hasil: string = '';
-
+function users(users) {
+    let hasil = '';
     users.forEach((item) => {
         hasil += user(item);
         hasil += '\n';
     });
-
     return `<div>
         ${hasil}
     </div>`;
 }
-
-export const halDaftarUser = (s: ISessionData, daftarUser: IUser[]): string => {
+const halDaftarUser = (s, daftarUser) => {
     return `
         <html>
 
         <head>
-            ${dataWeb.meta}
+            ${data_1.dataWeb.meta}
             <link href="/css/css.css" rel="stylesheet"/>
         </head>
 
         <body>
         
-            ${dataWeb.pesanHtml(s)}
+            ${data_1.dataWeb.pesanHtml(s)}
 
-            ${/** daftar anggota */ ""}
+            ${ /** daftar anggota */""}
             <div class="daftar-anggota">
                 ${users(daftarUser)}
             </div>
 
-            ${nav()}
+            ${(0, elNav_1.nav)()}
         </body>
 
         </html>`;
-}
+};
+exports.halDaftarUser = halDaftarUser;

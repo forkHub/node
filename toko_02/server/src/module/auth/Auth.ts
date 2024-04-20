@@ -1,5 +1,5 @@
 import { AuthSql } from "./AuthSql";
-import { Cont } from "./Cont";
+import { Cont } from "./AuthCont";
 import { ContPost } from "./ContPost";
 import { Router } from "./Router";
 

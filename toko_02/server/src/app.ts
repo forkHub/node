@@ -8,7 +8,7 @@ import { config } from "./config/Config";
 import { upload } from "./module/upload/Upload";
 import { auth } from "./module/auth/Auth";
 import multer from "multer";
-import { toko } from "./module/toko/toko";
+import { toko } from "./module/toko";
 
 const app: express.Express = express();
 const port: number = 3000;
@@ -50,12 +50,15 @@ try {
 	if (config.dev) {
 		allowedDomains.push('htp://localhost:80');
 		allowedDomains.push('http://localhost');
+		allowedDomains.push('http://localhost:3000');
 	}
 
 	app.use(function (_req, res, next) {
+		console.log("path: " + _req.path);
 
 		console.group('check origin');
 		console.log("allowed origin:", allowedDomains);
+		console.log("requrest origin: " + _req.headers.origin);
 
 		if (allowedDomains.indexOf(_req.headers.origin) > -1) {
 			console.log("allowed");
@@ -73,9 +76,9 @@ try {
 		next();
 	});
 
-	app.use("/", auth.router.router);
-	app.use("/", upload.router.router);
-	app.use("/", toko.router.router);
+	app.use("", auth.router.router);
+	app.use("", upload.router.router);
+	app.use("", toko.router.router);
 
 	// appuse
 

@@ -1,7 +1,7 @@
 import { sql } from "../Sql";
 
 export class AuthSql {
-	baru(userName: string, password: string): IUser[] | PromiseLike<IUser[]> {
+	baru(userName: string, password: string): ILapak[] | PromiseLike<ILapak[]> {
 		userName;
 		password;
 		throw new Error("Method not implemented.");
@@ -12,7 +12,7 @@ export class AuthSql {
 		throw new Error("Method not implemented.");
 	}
 
-	daftar(): IUser[] | PromiseLike<IUser[]> {
+	daftar(): ILapak[] | PromiseLike<ILapak[]> {
 		throw new Error("Method not implemented.");
 	}
 
@@ -21,13 +21,13 @@ export class AuthSql {
 		throw new Error("Method not implemented.");
 	}
 
-	async login(userName: string, password: string): Promise<IUser[]> {
+	async login(userName: string, password: string): Promise<ILapak[]> {
 
-		let hasil: IUser[] = await sql.query(`
+		let hasil: ILapak[] = await sql.query(`
 			SELECT *
 			FROM auth
 			WHERE user_name = ? AND password = ? AND hapus = ?
-		`, [userName, password, 0]) as IUser[];
+		`, [userName, password, 0]) as ILapak[];
 
 		return hasil;
 	}

@@ -1,51 +1,3 @@
-// interface ISlAnggota {
-// 	id?: number,
-// 	nama?: string,
-// 	nama_lengkap?: string,
-// 	alamat?: string,
-// 	jkl?: string,
-// 	wa?: string,
-// 	fb?: string,
-// 	instagram?: string,
-// 	tgl_lahir?: string,
-// 	tgl_meninggal?: string,
-// 	foto?: string;
-// 	thumb?: string;
-
-// 	ortu_id?: number,
-// 	rel_id?: number,
-// 	bani?: number,
-
-// 	//external
-// 	populated?: boolean
-// 	pas?: ISlAnggota;
-// 	rel?: ISlRelasi;
-
-// 	ortu?: ISlAnggota[];
-// 	saudara?: ISlAnggota[];
-// 	mbah?: ISlAnggota[];
-// 	lek?: ISlAnggota[];
-// 	sepupu?: ISlAnggota[];
-// 	ponakan?: ISlAnggota[];
-// 	cucu?: ISlAnggota[];
-
-// 	pasangan_id?: number,
-// 	pasangan_nama?: string,
-// 	ayah_nama?: string
-// 	ibu_nama?: string
-// 	anak?: ISlAnggota[]
-// }
-
-// interface ISlRelasi {
-// 	id?: number,
-// 	istri?: number,
-// 	suami?: number,
-
-// 	//external
-// 	nama_suami?: string,
-// 	nama_istri?: string
-// }
-
 interface IJUmlah {
 	jumlah: number;
 }
@@ -62,7 +14,7 @@ interface IHasilQuery {
 }
 
 interface ISessionData {
-	id: number;
+	id: string;
 	statusLogin: boolean;
 	role: number;
 	defId: number;
@@ -89,17 +41,30 @@ interface ISessionData {
 	}
 }
 
-interface IUser {
-	id: number,
-	user_name: string,
+interface ILapak {
+	id: string,
+	userName: string,
 	password: string,
-	hapus: boolean,
+	hapus: number,
 	role: number,
 
-	// def_id: number
-	nama_lapak: string
+	//lapak info
+	namaLapak: string
+	deskripsi: string;
+
+	//generated
+	daftarBarang: IBarang[]
 }
 
 interface IJUmlah {
 	jumlah: number;
+}
+
+interface IBarang {
+	id: string,
+	lapakId: string,
+	nama: string,
+	deskripsi: string,
+	harga: number,
+	hapus: boolean,
 }

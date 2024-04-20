@@ -1,7 +1,7 @@
 import express from "express";
 import { util } from "../module/Util";
 import { dataWeb } from "../data";
-import { URL } from "../module/toko/store";
+import { URL } from "../module/store";
 
 export function barangBaru(req: express.Request, resp: express.Response): void {
     try {
@@ -14,7 +14,7 @@ export function barangBaru(req: express.Request, resp: express.Response): void {
 
 function menu(): string {
     return `
-        <a href="${util.getUrl(URL.gudang_daftar, [])}">dafar barang</a>
+        <a href="${util.getUrl(URL.pl_barang_daftar, [])}">dafar barang</a>
     `;
 }
 
@@ -31,7 +31,7 @@ function html(): string {
         <body>
             ${menu()}
             <hr/>
-            <form method="post" action="${URL.gudang_barang_baru}">
+            <form method="post" action="${URL.pl_barang_baru}">
 
             </form>
             <script src="/js/gudang/hal_barang_baru.js"></script>

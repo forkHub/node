@@ -1,4 +1,4 @@
-import { sql } from "../../Sql";
+import { sql } from "./Sql";
 
 export class Barang {
 

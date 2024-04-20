@@ -1,17 +1,17 @@
 import express from "express";
 import { dataWeb } from "../data";
-import { urlRes } from "../module/toko/store";
-import { toko } from "../module/toko/toko";
+import { urlRes } from "../module/store";
+import { toko } from "../module/toko";
 import { util } from "../module/Util";
 
-function item(barang: IBarang[]): string {
+function item(user: ILapak[]): string {
     let hasil = '';
 
-    barang.forEach((item) => {
+    user.forEach((item) => {
         hasil += `<div>
-            <a href='${urlRes.barang(item.id)}'>
-                <span>${item.nama}</span>
-                <span>${item.harga}</span>
+            <a href='${urlRes.lapak(item.id)}'>
+                <span>${item.namaLapak}</span>
+                <span>${item.deskripsi}</span>
             </a>
         </div>`
     })
@@ -19,7 +19,7 @@ function item(barang: IBarang[]): string {
     return hasil;
 }
 
-function html(barang: IBarang[]): string {
+function html(user: ILapak[]): string {
     return `
         <html>
 
@@ -29,7 +29,7 @@ function html(barang: IBarang[]): string {
         </head>
 
         <body>
-            ${item(barang)}
+            ${item(user)}
         </body>
 
         </html>`;
@@ -49,8 +49,7 @@ export function beranda(req: express.Request, resp: express.Response): void {
     }
 }
 
-//TODO: diganti daftar lapak
 async function data(): Promise<string> {
-    let barang = await toko.barang.daftar();
+    let barang: ILapak[] = await toko.lapakSql.daftarLapak();
     return html(barang);
 }

@@ -1,23 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.lapak = void 0;
+exports.daftarLapak = void 0;
 const data_1 = require("../data");
 const store_1 = require("../module/toko/store");
 const toko_1 = require("../module/toko/toko");
 const Util_1 = require("../module/Util");
-function item(barang) {
+function items(barang) {
     let hasil = '';
     barang.forEach((item) => {
         hasil += `<div>
-            <a href='${store_1.urlRes.barang(item.id)}'>
-                <span>${item.nama}</span>
-                <span>${item.harga}</span>
+            <a href='${store_1.urlRes.lapak(item.id)}'>
+                <span>${item.namaLapak}</span>
+                <span>${item.deskripsi}</span>
             </a>
         </div>`;
     });
     return hasil;
 }
-function html(barang) {
+function html(users) {
     return `
         <html>
 
@@ -27,13 +27,14 @@ function html(barang) {
         </head>
 
         <body>
-            ${item(barang)}
+            ${items(users)}
         </body>
 
         </html>`;
 }
 //entry point
-function lapak(req, resp) {
+function daftarLapak(req, resp) {
+    console.log('render daftar lapak');
     try {
         data().then((hasil) => {
             resp.status(200).send(hasil);
@@ -45,9 +46,9 @@ function lapak(req, resp) {
         Util_1.util.resp500(req, resp, e);
     }
 }
-exports.lapak = lapak;
+exports.daftarLapak = daftarLapak;
 //TODO: diganti daftar lapak
 async function data() {
-    let barang = await toko_1.toko.lapak.daftarLapak();
-    return html(barang);
+    let user = await toko_1.toko.lapak.daftarLapak();
+    return html(user);
 }

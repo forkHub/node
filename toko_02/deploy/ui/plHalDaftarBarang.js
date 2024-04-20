@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.halDaftarBarang = void 0;
 const Util_1 = require("../module/Util");
-const toko_1 = require("../module/toko/toko");
+const toko_1 = require("../module/toko");
 const data_1 = require("../data");
-const store_1 = require("../module/toko/store");
+const store_1 = require("../module/store");
 function halDaftarBarang(req, resp) {
     try {
         data().then((hasil) => {
@@ -60,6 +60,6 @@ function html(barang) {
         </html>`;
 }
 async function data() {
-    let barang = await toko_1.toko.pelapak.barang.daftar();
+    let barang = await toko_1.toko.pelapakModule.barang.daftar();
     return html(barang);
 }
