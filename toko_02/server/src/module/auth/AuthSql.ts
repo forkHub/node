@@ -25,8 +25,8 @@ export class AuthSql {
 
 		let hasil: ILapak[] = await sql.query(`
 			SELECT *
-			FROM auth
-			WHERE user_name = ? AND password = ? AND hapus = ?
+			FROM lapak
+			WHERE userName = ? AND password = ? AND hapus = ?
 		`, [userName, password, 0]) as ILapak[];
 
 		return hasil;

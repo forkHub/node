@@ -8,6 +8,8 @@ export class ContPost {
 
     async login(req: express.Request, resp: express.Response): Promise<void> {
         try {
+            console.log("post login handler:");
+
             let userName: string = req.body.user_name;
             let password: string = md5(req.body.password);
 

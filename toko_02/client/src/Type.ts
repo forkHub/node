@@ -40,17 +40,30 @@ interface ISessionData {
 	}
 }
 
-interface IAuth {
-	id: number,
-	user_name: string,
+interface ILapak {
+	id: string,
+	userName: string,
 	password: string,
 	hapus: number,
 	role: number,
 
-	// def_id: number
-	nama_lapak: string
+	//lapak info
+	namaLapak: string
+	deskripsi: string;
+
+	//generated
+	daftarBarang: IBarang[]
 }
 
 interface IJUmlah {
 	jumlah: number;
+}
+
+interface IBarang {
+	id: string,
+	lapakId: string,
+	nama: string,
+	deskripsi: string,
+	harga: number,
+	hapus: boolean,
 }

@@ -8,8 +8,8 @@ import { halUserBaru } from "../../ui/halUserBaru";
 export class RouterGet {
 
     impl(router: express.Router): void {
-        router.get("/auth", auth.cont.cGet.login);
         router.get("/auth/login", auth.cont.cGet.login);
+        router.get("/auth", auth.cont.cGet.login);
 
         router.get("/auth/baru", (req: express.Request, resp: express.Response) => {
             try {

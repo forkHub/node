@@ -1,4 +1,4 @@
-import { URL, kons } from "./Url.js";
+import { URL, urlRes } from "./store.js";
 import { Util } from "./Util.js";
 
 window.onload = () => {
@@ -28,7 +28,7 @@ window.onload = () => {
                     el.onclose = (e) => {
 
                         let str: string = xhr.responseText;
-                        let obj: IAuth = JSON.parse(str);
+                        let obj: ILapak = JSON.parse(str);
                         console.log(obj);
 
                         if (obj.role == 1) {
@@ -36,7 +36,7 @@ window.onload = () => {
                         }
                         else {
                             //beranda admin
-                            window.top.location.href = kons.lapakProfile('');
+                            window.top.location.href = urlRes.lapak(obj.id);
                         }
 
 

@@ -1,8 +1,8 @@
 export enum URL {
-    auth_login = '/auth/login',
-    auth_baru = '/auth/daftar',
-    auth_lupa = '/auth/lupa',
-    auth_logout = '/auth/logout',
+    auth_login = 'auth/login',
+    auth_baru = 'auth/daftar',
+    auth_lupa = 'auth/lupa',
+    auth_logout = 'auth/logout',
 
     //toko
     beranda = `/`,
