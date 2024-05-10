@@ -1,9 +1,10 @@
-import { sql } from "./Sql";
+import { sql } from "../Sql";
 
+//TODO: di modif buat pelapak
 export class Barang {
 
     /**
-     * daftar barang di gudang
+     * daftar barang
      * @returns 
      */
     async daftar(): Promise<IBarang[]> {

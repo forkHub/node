@@ -257,11 +257,16 @@ async function simpan(nama: string = "data.txt") {
 
 async function cariPrime() {
     let ulang = true;
+    let ctr = 0;
 
     while (ulang) {
+        console.log("");
         await prime();
 
         let timer2 = Date.now();
+
+        ctr++;
+        if (ctr > 20) break;
 
         if ((timer2 - timer) > (1000 * 60 * 15)) {
             timer = timer2;
@@ -276,40 +281,29 @@ async function cariPrime() {
 async function prime() {
     angka = tambah(angka, '1');
 
-    // console.log('angka: ' + angka);
-
-    //check apakah ada yang sama dengan prime
-    let sama = false;
-
-    // if (checkSkip2(angka)) return;
+    console.log('angka: ' + angka);
 
     for (let i = 0; i < primes.length; i++) {
         let p = primes[i];
 
-        if (p.next == angka) {
-            p.next = tambah(p.next, p.value);
-            sama = true;
+        if (await habisDibagi(angka, p.value, p.next)) {
+            console.log('habis dibagi ' + p.value);
+            p.next = angka;
+            return;
         }
     }
 
-    //tidak ada yang sama, ketemu prime baru
-    if (false == sama) {
-        // console.log('ketemu prime: ' + angka + '/' + (await ha.cacah.kali(angka, '2')));
-        let n = await kali(angka, '2');
-
-        let p = {
-            value: angka,
-            next: n
-        }
-
-        primes.push(p);
-        lastPrime = angka;
-        updateData();
-        updateUI();
-        await simpan();
-
-        // console.log('last prime ' + lastPrime);
+    let p = {
+        value: angka,
+        next: angka
     }
+
+    primes.push(p);
+    lastPrime = angka;
+    console.log('primbe baru ' + angka);
+    updateData();
+    updateUI();
+    await simpan();
 }
 
 async function start() {

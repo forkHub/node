@@ -1,5 +1,8 @@
 import { Connection } from "./Connection";
 
+/**
+ * General Query method
+ */
 class Sql {
 	async query(query: string, data: any[]): Promise<unknown[]> {
 		// this.log(query, data);

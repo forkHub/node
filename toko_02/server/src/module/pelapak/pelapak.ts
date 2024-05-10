@@ -1,5 +1,5 @@
-import { Barang } from "../barangObj";
-import { PelapakRouter } from "./router";
+import { Barang } from "./plBarangSql";
+import { PelapakRouter } from "./plRouter";
 
 export class Pelapak {
     readonly router = new PelapakRouter();

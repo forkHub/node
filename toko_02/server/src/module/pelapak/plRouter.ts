@@ -4,7 +4,6 @@ import { halDaftarBarang } from "../../ui/plHalDaftarBarang";
 import { toko } from "../toko";
 import { util } from "../Util";
 
-//TODO: dep
 export class PelapakRouter {
 
     impl(router: Router): void {

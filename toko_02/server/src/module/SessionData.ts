@@ -1,6 +1,11 @@
 import express from "express";
 
 
+/**
+ * Fungsi untuk mengambil session dari request dan mengisi dengan default value
+ * @param req 
+ * @returns 
+ */
 export function session(req: express.Request): ISessionData {
 	// console.log(req.session);
 

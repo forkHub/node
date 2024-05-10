@@ -1,3 +1,6 @@
+/**
+ * ENUM buat url
+ */
 export enum URL {
     auth_login = '/auth/login',
     auth_baru = '/auth/daftar',
@@ -23,6 +26,9 @@ export enum URL {
 
 }
 
+/**
+ * Url Resolver
+ */
 export const urlRes = {
     toko: URL.beranda,
     lapak: (id: string): string => {
